@@ -16,6 +16,9 @@ class SpeController extends Controller
         return view('spe_surveys.view',[
             'spe_surveys'=> $spe_surveys]);
     }
+
+     
+
     public function details(SpeSurvey $spe_surveys)
     {
         return view('spe_surveys.details',[
@@ -43,6 +46,7 @@ class SpeController extends Controller
         $teaching_period = $request ->input('teaching_period');
         $survey_upload_date = $request -> input('survey_upload_date');
         $module_id = $request -> input('module_id');
+        $spe_survey_number = $request-> spe_survey_number;
 
         $spe_surveys = new SpeSurvey();
         $spe_surveys->survey_title=$survey_title;
@@ -50,6 +54,7 @@ class SpeController extends Controller
         $spe_surveys->teaching_period = $teaching_period;
         $spe_surveys->survey_upload_date = $survey_upload_date;
         $spe_surveys->module_id = $module_id;
+        $spe_surveys->spe_survey_number = $spe_survey_number;
 
         
         $spe_surveys->save();
@@ -78,6 +83,7 @@ class SpeController extends Controller
         $spe_surveys = SpeSurvey::find($spe_surveys_id);
         
         $spe_surveys -> survey_title = $request -> input('survey_title');
+        $spe_surveys-> spe_survey_number = $request ->input('spe_survey_number');
         $spe_surveys -> unit_code = $request -> input('unit_code');
         $spe_surveys -> teaching_period = $request -> input('teaching_period');
         $spe_surveys -> survey_upload_date = $request -> input('survey_upload_date');

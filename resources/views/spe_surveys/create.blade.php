@@ -11,6 +11,11 @@
     {{Form::text('survey_title','', null, ['class'=>'form-control'])}}
 </div>
 
+<div>
+    {{Form::label("Survey Number", null, ['class'=>'form-label'])}}
+    {{Form::text('spe_survey_number','', ['class'=>'form-control'])}}
+</div>
+
 <br>
 
 <div>

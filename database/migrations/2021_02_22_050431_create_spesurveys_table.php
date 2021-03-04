@@ -19,7 +19,6 @@ class CreateSpesurveysTable extends Migration
             $table->string('unit_code',100);
             $table->string('teaching_period',200);
             $table->timestamp('survey_upload_date');
-            $table->string('survey_question',300);
             $table->foreignId('upload_id')->constrained();
             $table->timestamps();
         });

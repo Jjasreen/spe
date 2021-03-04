@@ -6,6 +6,7 @@
     <thead>
         <tr>            
             <th>Survey ID</th>
+            <th>Survey Number</th>
             <th>Survey Title</th>
             <th>Unit Code</th>
             <th>Teaching Period</th>
@@ -19,6 +20,7 @@
         @foreach($spe_surveys as $s)
         <tr>
             <td>{{$s->id}}</td>
+            <td>{{$s->spe_survey_number}}</td>
             <td>{{$s->survey_title}}</td>
             <td>{{$s->unit_code}}</td>
             <td>{{$s->teaching_period}}</td>

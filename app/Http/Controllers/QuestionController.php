@@ -35,6 +35,7 @@ class QuestionController extends Controller
         $survey_answer_three = $request -> input('survey_answer_three');
         $survey_answer_four = $request -> input('survey_answer_four');
         $survey_answer_five = $request -> input('survey_answer_five');
+        $question_comments = $request -> input ('question_comments');
         $spe_survey_id = $speSurvey->id;
 
         $survey = new SpeSurveyQuestion();
@@ -45,6 +46,7 @@ class QuestionController extends Controller
         $survey->survey_answer_three = $survey_answer_three;
         $survey->survey_answer_four =$survey_answer_four;
         $survey->survey_answer_five =$survey_answer_five;
+        $survey->question_comments = $question_comments;
         $survey->spe_survey_id = $speSurvey->id;
         $survey->save();
 
@@ -71,6 +73,7 @@ class QuestionController extends Controller
         $question->survey_answer_four = $request->input('survey_answer_four');
         $question->survey_answer_five = $request->input('survey_answer_five');
         $question->question_number = $request->input('question_number');
+        $question->question_comments = $request->input('question_comments');
         $question->save();
 
 

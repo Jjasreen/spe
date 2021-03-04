@@ -8,6 +8,11 @@
     {{Form::text('survey_title',$surveys->survey_title, ['class'=>'form-control'])}}
 </div>
 
+<div>
+    {{Form::label("Survey Number", null, ['class'=>'form-label'])}}
+    {{Form::text('spe_survey_number',$surveys->spe_survey_number, ['class'=>'form-control'])}}
+</div>
+
 <br>
 
 <div>

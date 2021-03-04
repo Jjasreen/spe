@@ -3,6 +3,7 @@
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\SpeController;
+use App\Http\Controllers\SpeStudController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\UnitCoordinatorController;
 use App\Http\Controllers\UploadController;
@@ -66,6 +67,12 @@ Route::post('/spe_surveys/{spe_survey}/delete',[SpeController::class, "processDe
 
 Route::get('/spe_surveys/{spe_survey}/students/update', [SpeController::class, 'updateStudents']);
 Route::post('/spe_surveys/{spe_survey}/students/update', [SpeController::class, 'processUpdateStudents']);
+
+//SpeStudController
+Route::get('/spesurveys/{studentid}/{spesurvey}',[SpeStudController::class ,'show']);
+Route::post('/spesurveys/{studentid}/{spesurvey}',[SpeStudController::class ,'submit']);
+
+
 // question controller
 Route::get('/questions/{speSurvey}/show', [QuestionController::class, "show"]);
 Route::get('/questions/{speSurvey}/create',[QuestionController::class, "create"]);
@@ -81,3 +88,10 @@ Route::post('/questions/{question}/delete',[QuestionController::class, "processD
 // upload controller
 Route::get('/upload', [UploadController::class, 'upload']);
 Route::post('/upload', [UploadController::class, 'processUpload']);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

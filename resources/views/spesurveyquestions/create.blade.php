@@ -43,6 +43,11 @@
     {{Form::text('survey_answer_five', '', null, ['class'=>'form-control'])}}
 </div>
 
+<div>
+    {{Form::label("question comments", null, ['class'=>'form-label'])}}
+    {{Form::text('question_comments', '', null, ['class'=>'form-control'])}}
+</div>
+
 {{Form::submit('Create', ['class'=>'btn btn-primary mt-3'])}}
 {{Form::close()}}
 

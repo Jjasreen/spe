@@ -17,6 +17,7 @@ class CreateTeamsTable extends Migration
             $table->id();
             $table->string('unit_code');
             $table->string('teaching_period');
+            $table->string('team_name');
             $table->foreignId('module_id')->constrained();
             $table->timestamps();
         });
