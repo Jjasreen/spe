@@ -22,4 +22,6 @@ class SpeSurvey extends Model
     {
         return $this->belongsToMany(Student::class);
     }
+
+ 
 }

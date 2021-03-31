@@ -17,13 +17,11 @@ class CreatePollingsTable extends Migration
             $table->id();
             $table->string('unit_code');
             $table->string('teaching_period');
+            $table->integer('polling_number');
+            $table->string('polling_title');
             $table->timestamp('polling_upload_date');
-            $table->dateTime('polling_start_at');
-            $table->dateTime('polling_end_at');
-            $table->timestamp('polling_submit_date');
-            $table->foreignId('upload_id')->constrained();
             $table->foreignId('unit_coordinator_id')->constrained();
-            $table->foreignId('student_id')->constrained();
+            $table->foreignId('module_id')->constrained();
             $table->timestamps();
         });
     }

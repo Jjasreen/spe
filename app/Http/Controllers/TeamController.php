@@ -10,11 +10,12 @@ use Illuminate\Http\Request;
 class TeamController extends Controller
 {
     //
-    public function view()
+    public function view(Module $module)
     {
-        $teams = Team::all();
+        $teams = Team::where('module_id', $module->id)->get();
         return view('teams.view',[
-            'teams' => $teams
+            'teams' => $teams,
+            'module' => $module,
         ]);
     }
 

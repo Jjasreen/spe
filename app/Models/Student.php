@@ -10,10 +10,13 @@ class Student extends Model
     use HasFactory;
 
     public function teams(){
-        return $this->belongsToMany(Team::class);
+        return $this->belongsToMany(Team::class)->withPivot('role_type');
     }
 
-    public function spe_survey(){
+    public function survey(){
         return $this->belongsToMany(SpeSurvey::class);
     }
+
+    
 }
+

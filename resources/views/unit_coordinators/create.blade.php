@@ -21,10 +21,17 @@
     {{Form::label("Teaching Period", null, ['class'=>'form-label'])}}
     {{Form::text('teaching_period', '', ['class'=>'form-control'])}}
 </div>
+
 <div>
-    {{Form::label("User", null, ['class'=>'form-label'])}}
-    {{Form::select('user_id', $all_users, null, ['class'=>'form-control'])}}
+    {{Form::label("Email Address", null, ['class'=>'form-label'])}}
+    {{Form::text('email_address', '', ['class'=>'form-control'])}}
 </div>
+
+<div>
+    {{Form::label("Password", null, ['class'=>'form-label'])}}
+    {{Form::text('password', '', ['class'=>'form-control'])}}
+</div>
+
 
 {{Form::submit('Create', ['class'=>'btn btn-primary mt-3'])}}
 {{Form::close()}}

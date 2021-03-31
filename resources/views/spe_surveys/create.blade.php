@@ -12,6 +12,11 @@
 </div>
 
 <div>
+    {{Form::label("Survey Description", null, ['class'=>'form-label'])}}
+    {{Form::text('survey_description','', null, ['class'=>'form-control'])}}
+</div>
+
+<div>
     {{Form::label("Survey Number", null, ['class'=>'form-label'])}}
     {{Form::text('spe_survey_number','', ['class'=>'form-control'])}}
 </div>
@@ -21,6 +26,11 @@
 <div>
     {{Form::label("Unit Code", null, ['class'=>'form-label'])}}
     {{Form::select('unit_code',$surveys, null, ['class'=>'form-control'])}}
+</div>
+
+<div>
+    {{Form::label("Unit Coordinator ID", null, ['class'=>'form-label'])}}
+    {{Form::select('unit_coordinator_id',$uc, null, ['class'=>'form-control'])}}
 </div>
 
 <div>

@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class DeliverableSubmission extends Model
 {
     use HasFactory;
+    
+    public function module()
+    {
+        return $this->belongsTo(Module::class);
+    }
 }

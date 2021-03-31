@@ -18,7 +18,7 @@ class CreateUnitCoordinatorsTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('unit_code');
-            $table->string('teaching period');
+            $table->string('teaching_period');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
 

@@ -19,9 +19,11 @@ class QuestionController extends Controller
     //CREATE QUESTIONS FOR THAT PARTICULAR SURVEY
     public function create(SpeSurvey $speSurvey) 
     {
-     
+
+        $question_types = ['text' => 'Text', 'scale' => 'Scale'];
         return view('spesurveyquestions.create',[     
             'survey' => $speSurvey,
+            'question_types' => $question_types
         ]);
             
     }
@@ -30,24 +32,18 @@ class QuestionController extends Controller
     {
         $survey_question = $request -> input('survey_question');
         $survey_question_number = $request->input('question_number');
-        $survey_answer_one = $request -> input('survey_answer_one');
-        $survey_answer_two = $request -> input('survey_answer_two');
-        $survey_answer_three = $request -> input('survey_answer_three');
-        $survey_answer_four = $request -> input('survey_answer_four');
-        $survey_answer_five = $request -> input('survey_answer_five');
-        $question_comments = $request -> input ('question_comments');
+        $question_type = $request->input('question_type');
         $spe_survey_id = $speSurvey->id;
 
         $survey = new SpeSurveyQuestion();
         $survey->question_number = $survey_question_number;
         $survey->survey_question = $survey_question;
-        $survey->survey_answer_one = $survey_answer_one;
-        $survey->survey_answer_two = $survey_answer_two;
-        $survey->survey_answer_three = $survey_answer_three;
-        $survey->survey_answer_four =$survey_answer_four;
-        $survey->survey_answer_five =$survey_answer_five;
-        $survey->question_comments = $question_comments;
-        $survey->spe_survey_id = $speSurvey->id;
+        $survey->question_type = $question_type;
+        $survey->spe_survey_id = $spe_survey_id;
+        
+
+        
+
         $survey->save();
 
         return redirect('/questions/'.$speSurvey->id.'/show');
@@ -67,13 +63,7 @@ class QuestionController extends Controller
     {
 
         $question->survey_question = $request->input('survey_question');
-        $question->survey_answer_one = $request->input('survey_answer_one');
-        $question->survey_answer_two = $request->input('survey_answer_two');
-        $question->survey_answer_three = $request->input('survey_answer_three');
-        $question->survey_answer_four = $request->input('survey_answer_four');
-        $question->survey_answer_five = $request->input('survey_answer_five');
         $question->question_number = $request->input('question_number');
-        $question->question_comments = $request->input('question_comments');
         $question->save();
 
 

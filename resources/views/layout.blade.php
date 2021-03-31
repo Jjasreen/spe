@@ -1,24 +1,76 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Hello, world!</title>
+    <title>{{ config('app.name', 'SPE') }}</title>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <!-- Styles -->
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('css/main.css') }}" rel="stylesheet">
   </head>
-  <body>
-    <div class="container">
-        @yield('content')
+<body>
+<div id="app">
+    <nav class="navbar navbar-dark" style="background-color: black; color: white;">
+        <div class="d-flex" style="background-color: black;">
+            <a class="navbar-brand"style="background-color:black;"><img src="{{ URL::asset('img/logo.png') }}" alt=""></a>
+            <div>
+                <h1>SELF AND PEER EVALUATION PORTAL</h1>
+                @guest
+                    <div class="d-flex">
+                        @if (Route::has('login'))
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        @endif
+                    </div>
+                @else
+                    <div class="d-flex">
+                        @if (Auth::user()->role == "UC")
+                            <a class="nav-link" href="/home">Home</a>
+                            <a class="nav-link" href="/spe_surveys">SPE</a>
+                            <a class="nav-link" href="/upload">Students</a>
+                            <a class="nav-link" href="/modules">Modules</a>
+                            <a class="nav-link" href="/exportscore">Export Score</a>
+                        @elseif (Auth::user()->role == 'admin')
+                            <a class="nav-link" href="/unit_coordinators">Unit Coordinators</a>
+                            <a class="nav-link" href="/modulesadmin">Modules</a>
+                        @else
+                            <a class="nav-link" href="/">Deliverable Submission</a>
+                            <a class="nav-link" href="/">Alert UC</a>
+                        @endif
+                        <a class="nav-link" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
+                @endguest
+            </div>
+        </div>
+    </nav>
+
+  
+    <div class="container-fluid">
+    @yield('content')
     </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  </body>
+</div>
+</body>
 </html>
+

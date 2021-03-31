@@ -2,6 +2,9 @@
 
 @section('content')
 <h1>Unit Coordinator List</h1>
+<a href="/unit_coordinators/create" class="btn btn-secondary btn-sm">Add Unit Coordinator</a>
+<br>
+<br>
 <table class="table">   
     <thead>
         <tr>            
@@ -9,6 +12,7 @@
             <th>Last Name</th>
             <th>Unit Code</th>
             <th>Teaching Period</th>
+            <th>Action</th>
             <th></th>
         </tr>
     </thead>

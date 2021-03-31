@@ -2,6 +2,7 @@
 
 @section('content')
 <h1>SPE Survey List</h1>
+<a href="/upload_question" class="btn btn-secondary btn-sm">Upload Survey Questions</a>
 <table class="table">   
     <thead>
         <tr>            
@@ -31,7 +32,8 @@
                 <a href="/spe_surveys/{{$s->id}}/update" class="btn btn-primary btn-sm">Edit</a>
                 <a href="/spe_surveys/{{$s->id}}/delete" class="btn btn-danger btn-sm">Delete</a>
                 <a href="/questions/{{$s->id}}/show" class="btn btn-primary btn-sm">View Questions</a>
-
+                <a href="/spe_surveys/{{$s->id}}/manage" class="btn btn-primary btn-sm">Manage Students</a>
+                {{-- <a href="/exportscore/{{$s->id}}" class="btn btn-primary btn-sm">Export Score</a> --}}
             </td>
         </tr>
         @endforeach

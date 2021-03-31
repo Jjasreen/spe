@@ -16,4 +16,5 @@ class Team extends Model
     public function students(){
         return $this->belongsToMany(Student::class);
     }
+  
 }

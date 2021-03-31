@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-<h1>Team List</h1>
+<h1>Team List for Module {{$module->module_name}}</h1>
 <table class="table">   
     <thead>
         <tr>            

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\UnitCoordinator;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UnitCoordinatorController extends Controller
 {
@@ -20,9 +21,8 @@ class UnitCoordinatorController extends Controller
     // show the form
     public function create()
     {
-        $all_users = User::pluck('name', 'id');
+        
         return view('unit_coordinators.create',[
-            'all_users' => $all_users
         ]);
 
     }
@@ -33,14 +33,22 @@ class UnitCoordinatorController extends Controller
         $last_name = $request->input('last_name');
         $unit_code = $request->input('unit_code');
         $teaching_period = $request->input('teaching_period');
-        $user_id = $request->input('user_id');
+        $email_address = $request->input('email_address');
+        $password = $request->input('password');
         
+        $user = new User();
+
+        $user->name = $first_name . " " . $last_name;
+        $user->password =  Hash::make($password);
+        $user->email = $email_address;
+        $user->role = 'UC';
+        $user->save();
         $unit_coordinator = new UnitCoordinator();
         $unit_coordinator->first_name = $first_name;
         $unit_coordinator->last_name = $last_name;
         $unit_coordinator->unit_code = $unit_code;
         $unit_coordinator->teaching_period = $teaching_period;
-        $unit_coordinator->user_id = $user_id;
+        $unit_coordinator->user_id = $user->id;
         $unit_coordinator->save();
 
         return redirect('/unit_coordinators');
