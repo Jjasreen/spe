@@ -13,7 +13,7 @@ class CreateDisputecasesTable extends Migration
      */
     public function up()
     {
-        Schema::create('disputecases', function (Blueprint $table) {
+        Schema::create('dispute_cases', function (Blueprint $table) {
             $table->id();
             $table->string('case_title',100);
             $table->string('case_description',300);

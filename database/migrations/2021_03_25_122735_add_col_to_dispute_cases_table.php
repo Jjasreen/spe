@@ -13,7 +13,7 @@ class AddColToDisputecasesTable extends Migration
      */
     public function up()
     {
-        Schema::table('disputecases', function (Blueprint $table) {
+        Schema::table('dispute_cases', function (Blueprint $table) {
             //
             $table->foreignId('module_id')->constrained();
         });
