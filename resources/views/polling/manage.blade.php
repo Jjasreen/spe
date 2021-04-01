@@ -15,7 +15,7 @@
         <p>Unit Code: {{$spePolling->unit_code}}</p>
         <p>Module Name: {{$spePolling->module->module_name}}</p>
     </div>
-
+    <div>
     <h3 class="font-bold pb-2 text-center">Students</h3>
     {{ Form::open(['route' => ['send_polling_email_to_students', $spePolling->id], 'method' => 'POST']) }}
 
@@ -23,7 +23,7 @@
 {{--    {{Form::select('students[]', $students,--}}
 {{--              $students, ['multiple'=>true, 'class'=>'form-control'])}}--}}
 
-    <select name="students[]" class="form-multiselect block w-full mt-1" multiple>
+    <select name="students[]" class="form-multiselect form-control" multiple>
         @foreach($students as $student)
             <option value="{{ $student->id }}">{{ $student->s_title.' '.$student->s_givenname.' - '.$student->s_email  }}</option>
         @endforeach
@@ -50,8 +50,8 @@
 {{--        </tbody>--}}
 {{--    </table>--}}
 
-    {{ Form::submit('Send Emails to Selected Students', ['class' => 'my-3 inline-flex items-center px-4 py-2 border border-transparent shadow-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm']) }}
+    {{ Form::submit('Send Emails to Selected Students', ['class' => '']) }}
     {{ Form::close() }}
 
-
+</div>
 @endsection()

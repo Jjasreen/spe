@@ -13,4 +13,16 @@ class AlertCase extends Model
     {
         return $this->belongsTo(Student::class);
     }
+
+    public function spe_survey() {
+        return $this->belongsTo(SpeSurvey::class);
+    }
+
+    public function peer() {
+        return $this->belongsTo(Student::class, 'peer_id');
+    }
+
+    public function team() {
+        return $this->belongsTo(Team::class);
+    }
 }

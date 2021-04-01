@@ -23,7 +23,7 @@
         {{Form::label("Select students", null, ['class'=>'form-label'])}}
   
 
-         <select name="students[]" class="form-control" multiple style="background-color:black">
+         <select name="students[]" class="form-control" multiple style="background-color:white">
             @foreach($students as $student)
                 <option value="{{ $student->id }}">{{ $student->s_title.' '.$student->s_givenname.' - '.$student->s_email  }}</option>
             @endforeach
@@ -51,7 +51,7 @@
 {{--        </tbody>--}}
 {{--    </table>--}}
 
-    {{ Form::submit('Send Emails to Selected Students', ['class' => 'my-3 inline-flex items-center px-4 py-2 border border-transparent shadow-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm']) }}
+    {{ Form::submit('Send Emails to Selected Students', ['class' => '']) }}
     {{ Form::close() }}
 
 

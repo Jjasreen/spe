@@ -39,17 +39,17 @@
                 @else
                     <div class="d-flex">
                         @if (Auth::user()->role == "UC")
+                            <div class="mr-3">Welcome, {{Auth::user()->username}} (Unit Coordinator)<div>
                             <a class="nav-link" href="/home">Home</a>
                             <a class="nav-link" href="/spe_surveys">SPE</a>
                             <a class="nav-link" href="/upload">Students</a>
                             <a class="nav-link" href="/modules">Modules</a>
                             <a class="nav-link" href="/exportscore">Export Score</a>
                         @elseif (Auth::user()->role == 'admin')
+                            <div class="mr-3">Welcome, {{Auth::user()->username}} (Admin)<div>
                             <a class="nav-link" href="/unit_coordinators">Unit Coordinators</a>
                             <a class="nav-link" href="/modulesadmin">Modules</a>
-                        @else
-                            <a class="nav-link" href="/">Deliverable Submission</a>
-                            <a class="nav-link" href="/">Alert UC</a>
+                            <a class="nav-link" href="/admins">Administrators</a>
                         @endif
                         <a class="nav-link" href="{{ route('logout') }}"
                            onclick="event.preventDefault();

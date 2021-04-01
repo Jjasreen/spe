@@ -201,7 +201,7 @@ class SpeController extends Controller
                ->send(new SurveyEmail($survey_student));
         }
 
-        return "wow. email sent.";
+        return view('emails.thankyou');
 
 
     }

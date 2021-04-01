@@ -6,11 +6,11 @@
 {{Form::open()}}
 
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
- 
 
+<div class = "card">
 <div>
+    <h2 class = "card-title ml-3">Export Survey Student Scores</h2>
+    <div class = "card-body">
     {{Form::label("Survey", null, ['class'=>'form-label'])}}
     {{Form::select('survey_id',$surveys, null, ['class'=>'form-control'])}}
 </div>
@@ -21,4 +21,7 @@
 
 
 {{Form::close()}}
+</div>
+</div>
+</div>
 @endsection

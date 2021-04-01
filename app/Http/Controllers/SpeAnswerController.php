@@ -113,7 +113,13 @@ class SpeAnswerController extends Controller
                         $alert_cases->score = $item;
                         $alert_cases->team_id = $team->id;
                         $alert_cases->student_id = $index;
+                        $alert_cases->peer_id = $student->id;
+                        $alert_cases->spe_survey_id = $survey->id;
+                        $alert_cases->survey_question = $survey_question;
+                        $alert_cases->answers = $item;
+                        $alert_cases->question_number = $key;
                         $alert_cases->save();
+
                     }
                 }
               

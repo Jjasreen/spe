@@ -36,12 +36,57 @@
                 <td>{{$case->created_at->format('d/m/Y')}}</td>
                 <td>{{$case->students->s_givenname}}</td>
                 <td>{{$case->team->team_name}}</td>
-                <td>{{$case->module->module_name}}</td>
+                <td>{{$case->module_name}}</td>
             </tr>
 
         @endforeach
             </table>
+
+         
     </div>
+</div>
+<div  style="padding-left:20px; padding-right20px;" class="mt-3">
+    <h2>Alert Cases</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Student</th>
+                <th>Module</th>
+                <th>Survey Title</th>
+                <th>Question Number</th>
+                <th>Question</th>
+                <th>Answer</th>
+                <th>Submitted by</th>
+                <th>Team</th>
+            </tr>
+        </thead>
+
+        @foreach($alertCases as $case) 
+        
+        <tr>
+            <td>{{$case->id}}</td>
+            <td>{{$case->created_at->format('d/m/Y')}}</td>
+            <td>
+               
+                {{$case->student->s_givenname}}
+
+               
+            </td>
+            <td>{{$case->spe_survey->module->module_name}}</td>
+            <td>{{$case->spe_survey->survey_title}}</td>
+            <td>{{$case->question_number}}</td>
+            <td>{{$case->survey_question}}</td>
+            <td>{{$case->answers}}</td>
+            <td>{{$case->peer->s_givenname}}</td>
+            <td>{{$case->team->team_name}}</td>
+            
+        </tr>
+
+    @endforeach
+        </table>
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -90,5 +135,6 @@ const chart = new ApexCharts(document.querySelector('#chart'), options);
 </script>
 @else
 <h1>Admin</h1>
+<p>Welcome to SPE-Us. As a Admin, you will be able to add unit coordinators and modules to the system.</p>
 @endif
 @endsection

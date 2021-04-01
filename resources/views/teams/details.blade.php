@@ -13,7 +13,7 @@
 <h2>Team Members</h2>
 <ul class="list-group">
     @foreach($team->students as $student)
-    <li class="list-group-item">{{$student->s_givenname}}</li>    
+    <li class="list-group-item" style="color:black">{{$student->s_givenname}}</li>    
     @endforeach()
   </ul>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AlertCase;
 use App\Models\DeliverableSubmission;
 use App\Models\DisputeCase;
 use App\Models\DisputeCaseRequest;
@@ -49,11 +50,16 @@ class HomeController extends Controller
                         ->orderByDesc('created_at')
                         ->get();
 
-                
-     
+        $alertCases = AlertCase::with('spe_survey', 'student', 'spe_survey.module', 'peer')        
+                    ->whereHas('spe_survey.module', function($q) use ($unit_coordinator_id){
+                        return $q->where('unit_coordinator_id', $unit_coordinator_id);
+                    })->orderByDesc('created_at')
+                    ->get();
+                    
         return view('home', [
             'allSubmissions' => json_encode( $allSubmissions->toArray()),
-            'disputeCases' => $disputeCases
+            'disputeCases' => $disputeCases,
+            'alertCases' => $alertCases
         ]);
     }
 }

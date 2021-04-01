@@ -1,6 +1,7 @@
 
 <?php
 
+use App\Http\Controllers\CreateAdminController;
 use App\Http\Controllers\DisputeCaseController;
 use App\Http\Controllers\ExportScoreController;
 use App\Http\Controllers\ModuleController;
@@ -53,6 +54,21 @@ Route::get('/unit_coordinators/{uc}/update',[UnitCoordinatorController::class, "
 Route::post('/unit_coordinators/{uc}/update',[UnitCoordinatorController::class, 'processUpdate']);
 Route::get('/unit_coordinators/{uc}/delete',[UnitCoordinatorController::class, "delete"]);
 Route::post('/unit_coordinators/{uc}/delete',[UnitCoordinatorController::class, "processDelete"]);
+
+
+//admin 
+Route::get('/admins', [CreateAdminController::class, "view"]);
+Route::get('/admins/create',[CreateAdminController::class, "create"]);
+Route::post('/admins/create',[CreateAdminController::class, "processCreate"]);
+Route::get('/admins/{ad}/update',[CreateAdminController::class, "update"]);
+Route::post('/admins/{ad}/update',[CreateAdminController::class, 'processUpdate']);
+Route::get('/admins/{ad}/delete',[CreateAdminController::class, "delete"]);
+Route::post('/admins/{ad}/delete',[CreateAdminController::class, "processDelete"]);
+
+
+
+
+
 
 //Module functions
 Route::get('/modules', [ModuleController::class, "view"]);

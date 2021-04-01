@@ -3,12 +3,11 @@
 @section('content')
 
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-
+<div class ="card">
  
-            <h2 class="font-bold text-center">Student List</h2>
-            <p class="mt-1 text-md text-gray-700 text-center">Please note that only the following file formats CSV/XLSX are supported to import students details:</p>
+            <h2 class="card-title ml-3">Student List</h2>
+            <div class = "card-body">
+            <p>Please note that only the following file formats CSV/XLSX are supported to import students details:</p>
 
 
 {{Form::open(['method'=>'POST', 'files'=>true ])}}
@@ -21,4 +20,7 @@
 
 {{Form::submit('Upload', ['class'=>'btn btn-primary mt-3'])}}
 {{Form::close()}}
+</div>
+</div>
+</div>
 @endsection()
