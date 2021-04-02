@@ -36,6 +36,7 @@ class HomeController extends Controller
       ->groupBy('date')
       ->get();
       */
+      if (Auth::user()->role == 'UC') {      
         $unit_coordinator_id = Auth::user()->unit_coordinators->id;
         $allSubmissions = DB::table('deliverable_submissions')
                         ->join('teams', 'deliverable_submissions.team_id', '=', 'teams.id')
@@ -55,11 +56,19 @@ class HomeController extends Controller
                         return $q->where('unit_coordinator_id', $unit_coordinator_id);
                     })->orderByDesc('created_at')
                     ->get();
+                
                     
         return view('home', [
             'allSubmissions' => json_encode( $allSubmissions->toArray()),
             'disputeCases' => $disputeCases,
             'alertCases' => $alertCases
         ]);
+      } else {
+          return view('home',[
+          'allSubmissions' => json_encode([]),
+          'disputeCases' => [],
+          'alertCases' => []
+          ]);
+      }
     }
 }

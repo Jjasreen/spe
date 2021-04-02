@@ -19,10 +19,11 @@
     {{Form::text('email_address', '', ['class'=>'form-control'])}}
 </div>
 
-<div>
-    {{Form::label("Password", null, ['class'=>'form-label'])}}
-    {{Form::text('password', '', ['class'=>'form-control'])}}
-</div>
+    <div class="form-group">
+        <label>Password:</label>
+        <input type="password" id="password" name="password" class="form-control" data-toggle="password">
+    </div>
+
 
 
 {{Form::submit('Create', ['class'=>'btn btn-primary mt-3'])}}
