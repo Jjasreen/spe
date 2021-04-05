@@ -51,13 +51,30 @@ class UploadDeliverable extends Controller
         $module = Module::find( $deliverablestudent->module_id);
         $upload->unit_coordinator_id = $module->unit_coordinator_id;
         $upload->save();
+
+        // Second upload
+
+        $filename = time().'.'.$request->upload2->getClientOriginalName();
+        $request->upload2->move(public_path('uploads'), $filename);
+
+
+        $upload = new DeliverableSubmission();
+        $upload->file_name = $filename;
+        $upload->submission_upload_date = Carbon::now();
+        $upload->submission_title = $request -> input ('submission_title');
+        $upload->team_id = Team::where('module_id', $deliverablestudent->module_id)
+                            ->whereHas('students', function ($q) use ($deliverablestudent){
+                                $q->where('student_id', $deliverablestudent->student_id);
+                            })
+                            ->first()->id;       
+        
+                            
+        $module = Module::find( $deliverablestudent->module_id);
+        $upload->unit_coordinator_id = $module->unit_coordinator_id;
+        $upload->save();
+   
     
-
-     
-
-
-
-        return "file uploaded";
+       return "file uploaded";
 
     }
 

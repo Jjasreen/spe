@@ -89,7 +89,13 @@ class UnitCoordinatorController extends Controller
     }
     public function processDelete($id) {
         $all_users = UnitCoordinator::find($id);
+        $user = $all_users->user;
         $all_users->delete();
+
+
+        $user->delete();
+
+        
         return redirect('/unit_coordinators');
     }
 }

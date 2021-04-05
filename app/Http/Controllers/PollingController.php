@@ -23,15 +23,16 @@ class PollingController extends Controller
     public function view(Module $module)
     {
         $polling = Polling::where('module_id', $module->id)->get();
-        return view('polling.view',[
-            'polling' => $polling]);
+        return view('polling.view', [
+            'polling' => $polling
+        ]);
     }
 
     public function details(Polling $polling)
     {
-        return view('polling.details',[
+        return view('polling.details', [
             'polling' => $polling
-            ]);
+        ]);
     }
 
     public function create()
@@ -41,7 +42,7 @@ class PollingController extends Controller
         $unit_coordinator_id = UnitCoordinator::pluck('id', 'id');
         $module_name = Module::pluck('module_name', 'id');
 
-        return view('polling.create',[
+        return view('polling.create', [
             'p_unit_code' => $polling_unit_code,
             'tp' => $all_teaching_period,
             'uc_id' => $unit_coordinator_id,
@@ -51,13 +52,13 @@ class PollingController extends Controller
 
     public function processCreate(Request $request)
     {
-        $polling_title = $request-> polling_title;
-        $polling_number = $request-> polling_number;
-        $unit_code = $request ->input('unit_code');
-        $teaching_period = $request ->input('teaching_period');
-        $polling_upload_date = $request -> input('polling_upload_date');
-        $unit_coordinator_id = $request -> input('unit_coordinator_id');
-        $module_id = $request -> input('module_id');
+        $polling_title = $request->polling_title;
+        $polling_number = $request->polling_number;
+        $unit_code = $request->input('unit_code');
+        $teaching_period = $request->input('teaching_period');
+        $polling_upload_date = $request->input('polling_upload_date');
+        $unit_coordinator_id = $request->input('unit_coordinator_id');
+        $module_id = $request->input('module_id');
 
         $polling = new Polling();
         $polling->polling_title = $polling_title;
@@ -77,16 +78,17 @@ class PollingController extends Controller
 
     public function update(Polling $polling)
     {
-        $polling_unit_code = Module::pluck('unit_code', 'unit_code');
+        $uc_ids = Auth::user()->unit_coordinators->pluck('id');
+        // $polling_unit_code = Module::where('unit_coordinator_id', $uc_ids)->pluck('unit_code', 'unit_code');
         $all_teaching_period = Student::pluck('teaching_period', 'teaching_period');
-        $unit_coordinator_id = UnitCoordinator::pluck('id', 'id');
-        $module_name = Module::pluck('module_name', 'id');
+        // $unit_coordinator_id = UnitCoordinator::pluck('id', 'id');
+        $module_name = Module::where('unit_coordinator_id', $uc_ids)->pluck('module_name', 'id');
 
-        return view('polling.update',[
+        return view('polling.update', [
             'polling' => $polling,
-            'p_unit_code' => $polling_unit_code,
+            // 'p_unit_code' => $polling_unit_code,
             'tp' => $all_teaching_period,
-            'uc_id' => $unit_coordinator_id,
+            // 'uc_id' => $unit_coordinator_id,
             'mn' => $module_name,
         ]);
     }
@@ -94,23 +96,25 @@ class PollingController extends Controller
     public function processUpdate($polling_id, Request $request)
     {
         $polling = Polling::find($polling_id);
+        $module = Module::find($request->input('module_id'));
+        $uc_ids = Auth::user()->unit_coordinators->pluck('id');
 
-        $polling -> polling_title = $request -> input('polling_title');
-        $polling -> polling_number = $request -> input('polling_number');
-        $polling -> unit_code = $request -> input('unit_code');
-        $polling -> teaching_period = $request -> input('teaching_period');
-        $polling -> polling_upload_date = $request -> input('polling_upload_date');
-        $polling -> unit_coordinator_id = $request -> input('unit_coordinator_id');
-        $polling -> module_id = $request -> input('module_id');
+        $polling->polling_title = $request->input('polling_title');
+        $polling->polling_number = $request->input('polling_number');
+        $polling->unit_code = $module->unit_code;
+        $polling->teaching_period = $request->input('teaching_period');
+        $polling->polling_upload_date = $request->input('polling_upload_date');
+        $polling->unit_coordinator_id = $uc_ids->first();
+        $polling->module_id = $module->id;
         $polling->save();
 
-        return redirect('/polling');
+        return redirect('/polling/' . $polling->module_id);
     }
 
     public function delete($id)
     {
         $polling = Polling::find($id);
-        return view('polling.delete',['polling' => $polling]);
+        return view('polling.delete', ['polling' => $polling]);
     }
 
     public function processDelete($id)
@@ -120,42 +124,44 @@ class PollingController extends Controller
         return redirect('/polling');
     }
 
-    public function updateStudents(Polling $spePolling) {
+    public function updateStudents(Polling $spePolling)
+    {
         $students = Student::pluck('s_givenname', 'id');
-        return view('polling.update_students',[
+        return view('polling.update_students', [
             'students' => $students,
             'current_students' => $spePolling->students->pluck('id'),
             'spePolling' => $spePolling
         ]);
+    }
 
-    } 
-
-    public function processUpdateStudents(Polling $spePolling, Request $request) {
+    public function processUpdateStudents(Polling $spePolling, Request $request)
+    {
         $students = $request->input('students');
         $spePolling->students()->sync($students);
 
-        return redirect('/polling/'.$spePolling->id.'/details');
+        return redirect('/polling/' . $spePolling->id . '/details');
     }
 
-    public function overview(Polling $spePolling){
+    public function overview(Polling $spePolling)
+    {
 
         $student_surveys = PollingStudent::where('polling_id', $spePolling->id)->first();
 
         return view('polling.overview', compact('student_surveys', 'spePolling'));
-
     }
 
-    public function manage(Polling $spePolling){
+    public function manage(Polling $spePolling)
+    {
 
         $students = Student::all();
 
         return view('polling.manage', compact('students', 'spePolling'));
-
     }
 
-    public function sendEmails(Polling $spePolling, Request $request){
+    public function sendEmails(Polling $spePolling, Request $request)
+    {
 
-       
+
 
 
         // get all selected students
@@ -165,7 +171,7 @@ class PollingController extends Controller
 
 
         // send unique survey email out to each student
-        foreach($students as $student){
+        foreach ($students as $student) {
 
 
 
@@ -179,14 +185,52 @@ class PollingController extends Controller
             $polling_student->end_date = Carbon::now()->addDays(14);
             $polling_student->save();
 
-           Mail::to($student->s_email)
-               ->send(new PollingEmail($polling_student));
+            Mail::to($student->s_email)
+                ->send(new PollingEmail($polling_student));
         }
 
         return "wow. email sent.";
-
-
     }
 
+    public function results(Polling $polling)
+    {
 
+        $all_answers = [];
+        
+        $polling_answers = $polling->polling_answers;
+
+        foreach ($polling_answers as $answer) {
+            $theAnswers = json_decode($answer->answers);
+
+
+            foreach ($theAnswers as $a) {
+
+
+                if ($a->type != 'scale') {
+                    continue;
+                }
+
+                // if the question id has never been recorded in our answers array
+                if (!array_key_exists($a->question_id, $all_answers)) {
+                    $all_answers[$a->question_id] = [
+                        'question' => $a->question,
+                        'yes' => 0,
+                        'no' => 0
+                    ];
+                }
+
+
+                if ($a->answer == 'yes') {
+                    $all_answers[$a->question_id]['yes']++;
+                } else if ($a->answer == 'no') {
+                    $all_answers[$a->question_id]['no']++;
+                }
+            }
+        }
+
+        return view('polling.results',[
+            'polling' => $polling,
+            'all_answers' => $all_answers
+        ]);
+    }
 }

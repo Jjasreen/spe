@@ -24,7 +24,7 @@ class DisputeCaseController extends Controller
     {
         
         $uc_ids = Auth::user()->unit_coordinators()->pluck('id')->toArray();
-        $disputecase = DisputeCase::whereHas('module', function($q) use ($uc_ids){
+        $disputecase = DisputeCase::whereHas('module_id', function($q) use ($uc_ids){
             $q->whereIn('unit_coordinator_id',$uc_ids);
         });
 
@@ -85,12 +85,13 @@ class DisputeCaseController extends Controller
     {
         
 
+        $module = Module::find($module_id);
         $students = Student::whereHas('teams', function($q) use ($module_id){
             $q->where('student_team.role_type', '=', 'Secretary')
             ->where('module_id', '=', $module_id);
         })->get();
 
-        return view('disputecase.manage', compact('students','module_id'));
+        return view('disputecase.manage', compact('students','module_id', 'module'));
 
     } 
 

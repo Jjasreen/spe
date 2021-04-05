@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ExportScore;
 use App\Models\Module;
 use App\Models\SpeAnswer;
 use App\Models\SpeScore;
 use App\Models\SpeSurvey;
+use App\Models\Student;
+use App\Models\Team;
 use Illuminate\Http\Request;
 use Rap2hpoutre\FastExcel\FastExcel;
 use Auth;
+use DB;
 
 class ExportScoreController extends Controller
 {
@@ -31,9 +35,9 @@ class ExportScoreController extends Controller
         // I want all the models of a certain table
         // to match a criteria
         // SELECT * from spe_survey_scores WHERE survey_id = $survey
-        $scores = SpeScore::where('spe_survey_id', $survey)->get();
+        $scores =ExportScore::where('spe_survey_id', $survey)->get();
         foreach ($scores as &$score) {
-            $student_id = $score->student_id;
+            $student_id = $score->student_id; 
             $got_answer = SpeAnswer::where('student_id', $student_id)
                 ->where('spe_survey_id', $survey)
                 ->count() > 0;
@@ -42,10 +46,12 @@ class ExportScoreController extends Controller
                 $score->spe_total_scores = 0;
             }
 
+            
+  
+
         }
 
         return (new FastExcel($scores))->download('file.xlsx');
-
 
 
     }

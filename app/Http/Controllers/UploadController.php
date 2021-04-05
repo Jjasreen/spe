@@ -29,11 +29,14 @@ class UploadController extends Controller
 
         // process the import
         (new FastExcel)->import('uploads/'.$filename, function($line){
+            $module = Module::where('unit_code', $line['Unit Code'])->first();
             $team_name = $line['Team Name'];
-            $team = Team::where('team_name', $team_name)->first();
+            $team = Team::where('team_name', $team_name)
+                        ->where('module_id', $module->id)
+                        ->first();
             if (!$team) {
                 
-                $module = Module::where('unit_code', $line['Unit Code'])->first();
+              
                 
                 $team = new Team();
                 $team->team_name = $line['Team Name'];

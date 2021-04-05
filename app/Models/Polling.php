@@ -19,6 +19,10 @@ class Polling extends Model
         return $this->hasMany(PollingQuestion::class);
     }
 
+    public function polling_answers() {
+        return $this->hasMany(PollingAnswer::class);
+    }
+
     public function students()
     {
         return $this->belongsToMany(Student::class);

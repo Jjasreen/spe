@@ -2,7 +2,6 @@
 
 @section('content')
 <h1>Manage Modules</h1>
-<a href="/modules/create" class="btn btn-primary btn-sm">Create Module</a>
 <table class="table">   
     <thead>
         <tr>            
@@ -24,8 +23,7 @@
                 <a href="/spe_surveys?module_id={{$m->id}}" class="btn btn-primary btn-sm">Manage Survey</a>
                 <a href="/polling/{{$m->id}}" class="btn btn-primary btn-sm">Manage Poll</a>
                 <a href="/teams/{{$m->id}}" class="btn btn-primary btn-sm">Manage Teams</a>
-                <a href="/modules/{{$m->id}}/update" class="btn btn-primary btn-sm">Update Module</a>
-                <a href="/modules/{{$m->id}}/delete" class="btn btn-primary btn-sm">Delete Module</a>
+                <a href="/disputecase/{{$m->id}}/manage" class="btn btn-primary btn-sm">Manage Dispute Case</a>
                 
             </td>
         </tr>

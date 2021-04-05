@@ -36,7 +36,7 @@
                 <td>{{$case->created_at->format('d/m/Y')}}</td>
                 <td>{{$case->students->s_givenname}}</td>
                 <td>{{$case->team->team_name}}</td>
-                <td>{{$case->module_name}}</td>
+                <td>{{$case->module->module_name}}</td>
             </tr>
 
         @endforeach
@@ -96,7 +96,7 @@
     let data = [];
     for (let eachSubmission of allSubmissions) {
         teams.push(eachSubmission.team_name);
-        data.push(eachSubmission.submissions);
+        data.push(eachSubmission.submissions/2);
     }
 
 

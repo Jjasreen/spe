@@ -58,8 +58,8 @@ class SpeAnswerController extends Controller
 
 
 //        $team = $speStudent->team;
-
-        $teammates = $student->teams->first()->students;
+        // dd($student->teams);
+        $teammates = $student->teams->where('module_id', $survey->module_id )->first()->students;    
         $teammates = $teammates->filter(function($value, $key) use ($student){
             return $value->id !== $student->id;
         }); // remove current student from teammates collection so there's no double counting

@@ -15,15 +15,12 @@
 
 <br>
 
-<div>
+{{-- <div>
     {{Form::label("Unit Code", null, ['class'=>'form-label'])}}
     {{Form::select('unit_code',$p_unit_code, $polling->unit_code, ['class'=>'form-control'])}}
-</div>
+</div> --}}
 
-<div>
-    {{Form::label("Unit Coordinator ID", null, ['class'=>'form-label'])}}
-    {{Form::select('unit_coordinator_id',$uc_id, null, ['class'=>'form-control'])}}
-</div>
+
 
 <div>
     {{Form::label("Teaching Period", null, ['class'=>'form-label'])}}

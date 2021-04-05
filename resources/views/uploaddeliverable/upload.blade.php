@@ -11,8 +11,13 @@
 
 
 <div>
-    {{Form::label('Select file to upload:', null, ['class'=>'form-label'])}}
+    {{Form::label('Select Weeky Status Report:', null, ['class'=>'form-label'])}}
     {{Form::file('upload', ['class'=>'form-control'])}}
+</div>
+
+<div>
+    {{Form::label('Select Deliverable Task Breakdown:', null, ['class'=>'form-label'])}}
+    {{Form::file('upload2', ['class'=>'form-control'])}}
 </div>
 
 {{Form::submit('Upload', ['class'=>'btn btn-primary mt-3'])}}

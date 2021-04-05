@@ -17,4 +17,5 @@ class Team extends Model
         return $this->belongsToMany(Student::class);
     }
   
+    
 }

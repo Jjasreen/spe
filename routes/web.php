@@ -120,6 +120,7 @@ Route::get('/polling/{polling}/update', [PollingController::class, 'update'] );
 Route::post('/polling/{polling}/update', [PollingController::class, 'processUpdate']);
 Route::get('/polling/{polling}/delete',[PollingController::class, "delete"]);
 Route::post('/polling/{polling}/delete',[PollingController::class, "processDelete"]);
+Route::get('/polling/{polling}/results', [PollingController::class, 'results']);
 //Polling Overview
 Route::get('/polling/{spePolling}/overview', [PollingController::class, 'overview'] );
 Route::get('/polling/{spePolling}/manage', [PollingController::class, 'manage'] );

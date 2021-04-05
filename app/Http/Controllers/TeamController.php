@@ -87,7 +87,7 @@ class TeamController extends Controller
 
         $team->students()->sync($syncData);
 
-        return redirect('/teams');
+        return redirect('/teams/'.$team->module_id);
     }
     public function delete($id)
     {

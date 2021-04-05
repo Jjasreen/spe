@@ -8,12 +8,12 @@
 
 <div>
     {{Form::label("Question Number", null, ['class'=>'form-label'])}}
-    {{Form::text('question_number',$question->polling_question_number, ['class'=>'form-control'])}}
+    {{Form::text('polling_question_number',$question->polling_question_number, ['class'=>'form-control'])}}
 </div>
 
 <div>
     {{Form::label("Question", null, ['class'=>'form-label'])}}
-    {{Form::text('survey_question',$question->polling_question, ['class'=>'form-control'])}}
+    {{Form::text('polling_question',$question->polling_question, ['class'=>'form-control'])}}
 </div>
 
 <br>
