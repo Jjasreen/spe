@@ -33,9 +33,7 @@
                 <h1>SELF AND PEER EVALUATION PORTAL</h1>
                 @guest
                     <div class="d-flex">
-                        @if (Route::has('login'))
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        @endif
+                        
                     </div>
                 @else
                     <div class="d-flex">

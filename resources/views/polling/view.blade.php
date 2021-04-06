@@ -35,6 +35,7 @@
                 <a href="/polling/{{$p->id}}/delete" class="btn btn-danger btn-sm">Delete</a>
                 <a href="/pollingquestions/{{$p->id}}/show" class="btn btn-primary btn-sm">View Questions</a>
                 <a href="/polling/{{$p->id}}/manage" class="btn btn-primary btn-sm">Manage Students</a>
+                <a href="/polling/{{$p->id}}/results" class="btn btn-primary btn-sm">View Poll Results</a>
             </td>
         </tr>
         @endforeach
